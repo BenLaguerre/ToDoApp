@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export default function Formulario(props) {
  const [name, setName] = useState('');
@@ -22,18 +26,32 @@ export default function Formulario(props) {
   function handleChangeDescription(e) {
     setDescription(e.target.value);
   }
+  
   return (
-    <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Título</label>
-        <input type="text" id="title" name="title" value={name} onChange={handleChangeTitle} ></input>
-        
-        <label htmlFor="tags">Tags</label>
-        <input type="text" id="tags" name="tags" value={tags} onChange={handleChangeTags}></input>
-        
-        <label htmlFor="description">Descripción</label>
-        <input type="text" id="description" name="description" value={description} onChange={handleChangeDescription}></input>
-        
-        <button type="submit" className="enviar">Enviar</button>
-      </form>
-  );
+    <Form onSubmit={handleSubmit}>
+     <Row><Col>
+      <Form.Group controlId="formTitle">
+        <Form.Label column="lg">Título</Form.Label>
+        <Form.Control name="title" value={name} onChange={handleChangeTitle} />
+      </Form.Group>
+      <Form.Group controlId="formTags">
+          <Form.Label column="lg">Tags</Form.Label>
+          <Form.Control name="tags" value={tags} onChange={handleChangeTags} />
+        </Form.Group>
+     </Col>
+      <Col xs={7}>
+      <Form.Group controlId="formDescritpion">
+          <Form.Label column="lg">Descripción</Form.Label>
+          <Form.Control as="textarea" rows={5} name="description" value={description} onChange={handleChangeDescription} />
+      </Form.Group>
+        </Col></Row>
+      <Row>
+        <Col></Col><Col></Col>
+        <Col>
+      <Button variant="success" size="lg" block type="submit" className="enviar">Enviar</Button>
+          </Col>
+        </Row>
+    </Form>
+   );
 }
+
